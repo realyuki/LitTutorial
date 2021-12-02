@@ -1,10 +1,9 @@
-import {LitElement, html, css} from 'lit';
+import {LitElement, html, css, customElement, property} from 'lit-element';
 
+@customElement('todo-list')
 class ToDoList extends LitElement {
-  static properties = {
-    listItems: {attribute: false},
-    hideCompleted: {},
-  };
+  @property({attribute: false}) listItems = 'listItems';
+  @property({attribute: false}) hideCompleted = 'hideCompleted';
 
   static styles = css`
     .completed {
@@ -76,5 +75,3 @@ class ToDoList extends LitElement {
     `;
   };
 };
-
-customElements.define('todo-list', ToDoList);

@@ -11,9 +11,18 @@ module.exports = {
   devServer: {
     port: 9000,
   },
+  module: {
+    rules: [
+      {
+        test: /\.(ts|js)$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+      }
+    ]
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
-    }),
+    })
   ],
 };
