@@ -26,7 +26,6 @@ export class ToDoList extends LitElement {
   toggleCompleted(item: ToDoItem) {
     item.completed = !item.completed;
     this.requestUpdate();
-    console.log(this.listItems);
   }
 
   setHideCompleted(e: Event) {
