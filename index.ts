@@ -9,6 +9,9 @@ type ToDoItem = {
 @customElement('todo-list')
 export class ToDoList extends LitElement {
   static styles = css`
+    .todo {
+      color: blue;
+    }
     .completed {
       text-decoration-line: line-through;
       color: #777;
@@ -22,11 +25,21 @@ export class ToDoList extends LitElement {
   ];
   @property()
   hideCompleted = false;
+  @property()
+  titleText = '제목';
+
+  connectedCallback() { // componentDidMount
+    super.connectedCallback();
+    setTimeout(() => {
+      this.setAttribute('titleText', 'To Do');
+      this.requestUpdate();
+    }, 2000)
+  };
 
   toggleCompleted(item: ToDoItem) {
     item.completed = !item.completed;
     this.requestUpdate();
-  }
+  };
 
   setHideCompleted(e: Event) {
     this.hideCompleted = (e.target as HTMLInputElement).checked;
@@ -39,7 +52,7 @@ export class ToDoList extends LitElement {
     this.listItems.push({text: this.input.value, completed: false});
     this.input.value = '';
     this.requestUpdate();
-  }
+  };
 
   render() {
     const items = this.hideCompleted ? this.listItems.filter((item) => !item.completed) : this.listItems;
@@ -61,7 +74,7 @@ export class ToDoList extends LitElement {
     const todosOrMessage = items.length > 0 ? todos : caughtUpMessage;
 
     return html`
-      <h2 class="todo">To Do</h2>
+      <h2 class="todo">${this.titleText}</h2>
       ${todosOrMessage}
       <input id="newitem" aria-label="New item">
       <button @click=${this.addToDo}>Add</button>
@@ -75,3 +88,9 @@ export class ToDoList extends LitElement {
     `;
   };
 };
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'todo-list': ToDoList;
+  }
+}
