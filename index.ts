@@ -1,6 +1,7 @@
-import {LitElement, html, css} from 'lit';
-import {customElement, property, query} from 'lit/decorators.js';
+import { LitElement, html, css } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { resolve } from './webpack.config';
+import './child-tomato';
 
 // type ToDoItem = {
 //   text: string,
@@ -124,55 +125,95 @@ class Tomato extends LitElement {
   //   );
   // };
 
-  @property({
-    hasChanged: (newVal, oldVal) => {
-      console.log("has changed", oldVal, " to ", newVal);
-      return true;
-    },
-  })
-  name = "쭈노";
+  // @property({
+  //   hasChanged: (newVal, oldVal) => {
+  //     console.log("has changed", oldVal, " to ", newVal);
+  //     return true;
+  //   },
+  // })
+  // name = "쭈노";
 
-  connectedCallback() {
-    super.connectedCallback();
-    console.log('connected');
-  };
+  // connectedCallback() {
+  //   super.connectedCallback();
+  //   console.log('connected');
+  // };
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    console.log('discunnected');
-  };
+  // disconnectedCallback() {
+  //   super.disconnectedCallback();
+  //   console.log('discunnected');
+  // };
 
-  async performUpdate() {
-    console.log('performUpdate');
-    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
-    super.performUpdate();
-  };
+  // async performUpdate() {
+  //   console.log('performUpdate');
+  //   await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+  //   super.performUpdate();
+  // };
 
-  shouldUpdate(changeProperties: any) {
-    console.log('shouldUpdate?', changeProperties);
-    super.shouldUpdate(changeProperties);
-    return true;
-  };
+  // shouldUpdate(changeProperties: any) {
+  //   console.log('shouldUpdate?', changeProperties);
+  //   super.shouldUpdate(changeProperties);
+  //   return true;
+  // };
 
-  firstUpdated(changedProperties: any) {
-    console.log('first updated!');
-    super.firstUpdated(changedProperties);
-  };
+  // firstUpdated(changedProperties: any) {
+  //   console.log('first updated!');
+  //   super.firstUpdated(changedProperties);
+  // };
 
-  updated(changedProperties: any) {
-    console.log('updated', changedProperties);
-    super.updated(changedProperties);
-  };
+  // updated(changedProperties: any) {
+  //   console.log('updated', changedProperties);
+  //   super.updated(changedProperties);
+  // };
 
-  changeProperties() {
-    this.name = '쮸';
-  };
+  // changeProperties() {
+  //   this.name = '쮸';
+  // };
+
+  // render() {
+  //   return html`
+  //     <style></style>
+  //     <h1>hello ${this.name}</h1>
+  //     <button @click="${this.changeProperties}">누르면 바껴욤</button>
+  //   `;
+  // }
+
+  // @property() value = '';
+  // @property({ type: Boolean }) disabled = true;
+
+  // render() {
+  //   return html`
+  //     <input .value="${this.value}" @keyup=${this.onChange} ?disabled="${this.disabled}" />
+  //   `;
+  // };
+
+  // @property({ type: String }) value = 'tomato';
+  // @property({ type: Boolean }) disabled = true;
+
+  // onChange(e: any) {
+  //   this.value = e.target.value;
+  //   console.log(e.target.value);
+  // };
+
+  // render() {
+  //   return html`
+  //   <child-tomato
+  //     id="my-input"
+  //     .value="${this.value}"
+  //     .onchange="${this.onChange}"
+  //     ?disabled="${this.disabled}"
+  //   ></child-tomato>
+  //   `;
+  // }
 
   render() {
     return html`
-      <style></style>
-      <h1>hello ${this.name}</h1>
-      <button @click="${this.changeProperties}">누르면 바껴욤</button>
+      <child-tomato><p>자식</p></child-tomato>
     `;
   }
 };
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "lit-tomato": Tomato;
+  }
+}
